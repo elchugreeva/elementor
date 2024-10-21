@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Modules\Promotions\Controls\Promotion_Control;
 
 /**
  * Elementor image carousel widget.
@@ -89,27 +90,6 @@ class Widget_Image_Carousel extends Widget_Base {
 	 */
 	public function get_style_depends(): array {
 		return [ 'e-swiper', 'widget-image-carousel' ];
-	}
-
-	/**
-	 * Get widget upsale data.
-	 *
-	 * Retrieve the widget promotion data.
-	 *
-	 * @since 3.18.0
-	 * @access protected
-	 *
-	 * @return array Widget promotion data.
-	 */
-	protected function get_upsale_data() {
-		return [
-			'condition' => ! Utils::has_pro(),
-			'image' => esc_url( ELEMENTOR_ASSETS_URL . 'images/go-pro.svg' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'elementor' ),
-			'description' => esc_html__( 'Gain complete freedom to design every slide with Elementor"s Pro Carousel.', 'elementor' ),
-			'upgrade_url' => esc_url( 'https://go.elementor.com/go-pro-image-carousel-widget/' ),
-			'upgrade_text' => esc_html__( 'Upgrade Now', 'elementor' ),
-		];
 	}
 
 	public function has_widget_inner_wrapper(): bool {
@@ -401,6 +381,14 @@ class Widget_Image_Carousel extends Widget_Base {
 					'caption' => esc_html__( 'Caption', 'elementor' ),
 					'description' => esc_html__( 'Description', 'elementor' ),
 				],
+			]
+		);
+
+		$this->add_control(
+			Utils::IMAGE_CAROUSEL . '_promotion',
+			[
+				'label' => esc_html__( 'Carousel PRO widget', 'elementor' ),
+				'type' => Promotion_Control::TYPE,
 			]
 		);
 
